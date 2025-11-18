@@ -1,0 +1,45 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Build / Output folders
+dist/
+build/
+out/
+
+# MongoDB data folder (if local)
+data/
+
+# Optional: Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Optional: Mac/Linux hidden files
+*.swp
+*~
+
+# Optional: npm package-lock or yarn.lock (depends on your strategy)
+# package-lock.json
+# yarn.lock
