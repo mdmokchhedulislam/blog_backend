@@ -6,7 +6,7 @@ import ErrorResponse from '../utils/error_response.js';
 
 
 
-exports.getPosts = asyncHandler(async (req, res, next) => {
+export const getPosts = asyncHandler(async (req, res, next) => {
   const page = parseInt(req.query.page, 10) || 1;
   const limit = parseInt(req.query.limit, 10) || 10;
   const startIndex = (page - 1) * limit;
@@ -56,7 +56,7 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
 });
 
 
-exports.getPost = asyncHandler(async (req, res, next) => {
+export const getPost = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id)
     .populate('author', 'name avatar bio')
     .populate('categories', 'name')
@@ -82,8 +82,7 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 });
 
 
-exports.createPost = asyncHandler(async (req, res, next) => {
-  req.body.author = req.user.id;
+export const createPost = asyncHandler(async (req, res, next) => {
   
   const post = await Post.create(req.body);
 
@@ -95,6 +94,7 @@ exports.createPost = asyncHandler(async (req, res, next) => {
 
 
 
+export default {getPost, createPost}
 
 
 
