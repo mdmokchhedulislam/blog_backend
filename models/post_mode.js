@@ -1,3 +1,4 @@
+// models/Post.js
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
@@ -87,4 +88,5 @@ postSchema.pre('save', function(next) {
 // Index for search
 postSchema.index({ title: 'text', content: 'text' });
 
-module.exports = mongoose.model('Post', postSchema);
+const Post= mongoose.model('Post', postSchema);
+export default Post;
