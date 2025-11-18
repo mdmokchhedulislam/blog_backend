@@ -82,16 +82,36 @@ export const getPost = asyncHandler(async (req, res, next) => {
 });
 
 
-export const createPost = asyncHandler(async (req, res, next) => {
-  
-  const post = await Post.create(req.body);
+export const createPost = asyncHandler(async (req, res) => {
+    try {
+        let imageData = null;
+        if (req.file) {
+            const localFilePath = req.file.path;
+            const cloudinaryResponse = await uploadOnCloudinary(localFilePath);
 
-  res.status(201).json({
-    success: true,
-    data: post
-  });
+            if (cloudinaryResponse) {
+                imageData = {
+                    url: cloudinaryResponse.secure_url,
+                    public_id: cloudinaryResponse.public_id
+                };
+            }
+        }
+        const post = await Post.create({
+            ...req.body,
+            image: imageData
+        });
+
+        res.status(201).json({
+            success: true,
+            data: post
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message || "Server Error"
+        });
+    }
 });
-
 
 
 export default {getPost, createPost}
